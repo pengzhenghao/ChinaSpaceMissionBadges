@@ -5,7 +5,6 @@
 *上次更新日期：2021年 6月 3日*
 
 
----
 
 
 
@@ -15,7 +14,7 @@
 <! 第一行徽章开始 ––> 
   <tr>
     <td align="center" width=240px><! 第一列徽章开始 ––> 
-    <img align="center" width=240px style=" box-shadow:2px 2px 5px #333333;" src="resources/repo-cover-large.gif" />
+    <img align="center" width=240px style=" box-shadow:2px 2px 5px #333333;" src="gallery/2021/20210529/20210529.jpeg" />
     </td>
     <td align="center" width=240px><! 第二列徽章开始 ––> 
     <img align="center" width=240px style=" box-shadow:2px 2px 5px #333333;" src="resources/repo-cover-racing.gif" />
@@ -26,7 +25,7 @@
   </tr>
   <tr>
     <td align="center"><! 第一列徽章注释 ––> 
-    <b>第一<br>（2021年5月）</b>
+    <b><a href="gallery/2021/20210529/README.md">天舟二号</a><br>（2021年5月29日）</b>
     </td>
     <td align="center"><! 第二列徽章注释 ––> 
     <b>测试<br>（2021年6月）</b>
