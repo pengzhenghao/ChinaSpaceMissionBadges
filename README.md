@@ -14,14 +14,14 @@
 <table border="0" width=1000px align="center" style="margin-bottom: 100px;">
 <! 第一行徽章开始 ––> 
   <tr>
-    <td align="center"><! 第一列徽章开始 ––> 
-    <img align="center" width=300px  src="resources/repo-cover-large.gif" />
+    <td align="center" width=200px><! 第一列徽章开始 ––> 
+    <img align="center" width=200px  src="resources/repo-cover-large.gif" />
     </td>
-    <td align="center" width=400px><! 第二列徽章开始 ––> 
-    <img align="center" width=350px  src="resources/repo-cover-racing.gif" />
+    <td align="center" width=200px><! 第二列徽章开始 ––> 
+    <img align="center" width=200px  src="resources/repo-cover-racing.gif" />
     </td>
-    <td align="center" width=400px><! 第三列徽章开始 ––> 
-    <img align="center" width=350px  src="resources/repo-cover-racing.gif" />
+    <td align="center" width=200px><! 第三列徽章开始 ––> 
+    <img align="center" width=200px  src="resources/repo-cover-racing.gif" />
     </td>
   </tr>
   <tr>
@@ -45,14 +45,14 @@
 <table border="0" width=1000px align="center" style="margin-bottom: 100px;">
 <! 第一行徽章开始 ––> 
   <tr>
-    <td align="center"><! 第一列徽章开始 ––> 
-    <img align="center" width=300px  src="resources/repo-cover-large.gif" />
+    <td align="center" width=200px><! 第一列徽章开始 ––> 
+    <img align="center" width=200px  src="resources/repo-cover-large.gif" />
     </td>
-    <td align="center" width=400px><! 第二列徽章开始 ––> 
-    <img align="center" width=350px  src="resources/repo-cover-racing.gif" />
+    <td align="center" width=200px><! 第二列徽章开始 ––> 
+    <img align="center" width=200px  src="resources/repo-cover-racing.gif" />
     </td>
-    <td align="center" width=400px><! 第三列徽章开始 ––> 
-    <img align="center" width=350px  src="resources/repo-cover-racing.gif" />
+    <td align="center" width=200px><! 第三列徽章开始 ––> 
+    <img align="center" width=200px  src="resources/repo-cover-racing.gif" />
     </td>
   </tr>
   <tr>
