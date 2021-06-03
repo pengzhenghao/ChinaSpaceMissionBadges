@@ -11,17 +11,17 @@
 
 <details open> <! 这个模块是默认已经展示的可关闭模块 ––> 
 <summary>2021年</summary>  <! 这是可关闭模块对外展示的语句 ––> 
-<table border="0" width=1000px align="center" style="margin-bottom: 100px;">
+<table border="none" width=1000px align="center" style="margin-bottom: 100px; border: none;">
 <! 第一行徽章开始 ––> 
-  <tr>
-    <td align="center" width=240px><! 第一列徽章开始 ––> 
-    <img align="center" width=240px  src="resources/repo-cover-large.gif" />
+  <tr border="none">
+    <td border="none" align="center" width=240px><! 第一列徽章开始 ––> 
+    <img align="center" width=240px style=" box-shadow:2px 2px 5px #333333;" src="resources/repo-cover-large.gif" />
     </td>
     <td align="center" width=240px><! 第二列徽章开始 ––> 
-    <img align="center" width=240px  src="resources/repo-cover-racing.gif" />
+    <img align="center" width=240px style=" box-shadow:2px 2px 5px #333333;" src="resources/repo-cover-racing.gif" />
     </td>
     <td align="center" width=240px><! 第三列徽章开始 ––> 
-    <img align="center" width=240px  src="resources/repo-cover-racing.gif" />
+    <img align="center" width=240px style=" box-shadow:2px 2px 5px #333333;" src="resources/repo-cover-racing.gif" />
     </td>
   </tr>
   <tr>
@@ -46,13 +46,13 @@
 <! 第一行徽章开始 ––> 
   <tr>
     <td align="center" width=240px><! 第一列徽章开始 ––> 
-    <img align="center" width=240px  src="resources/repo-cover-large.gif" />
+    <img align="center" width=240px style=" box-shadow:2px 2px 5px #333333;" src="resources/repo-cover-large.gif" />
     </td>
     <td align="center" width=240px><! 第二列徽章开始 ––> 
-    <img align="center" width=240px  src="resources/repo-cover-racing.gif" />
+    <img align="center" width=240px style=" box-shadow:2px 2px 5px #333333;" src="resources/repo-cover-racing.gif" />
     </td>
     <td align="center" width=240px><! 第三列徽章开始 ––> 
-    <img align="center" width=240px  src="resources/repo-cover-racing.gif" />
+    <img align="center" width=240px style=" box-shadow:2px 2px 5px #333333;"  src="resources/repo-cover-racing.gif" />
     </td>
   </tr>
   <tr>
