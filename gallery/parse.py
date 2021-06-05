@@ -40,11 +40,11 @@ def _generate_test_file():
         INFO_SOURCE_NAME: ["百度百科"],
         INFO_SOURCE_URL: ["https://baike.baidu.com/item/%E5%A4%A9%E8%88%9F%E4%BA%8C%E5%8F%B7/24695456"],
     }])
-    df.to_excel("tmp.xlsx")
+    df.to_excel("dataset.xlsx")
 
 
 def read_dataset(test=False):
-    data_path = "dataset.xlsx" if not test else "tmp.xlsx"
+    data_path = "dataset.xlsx" if not test else "dataset.xlsx"
     df: pd.DataFrame = pd.read_excel(data_path)
     df["mission_year"] = df["mission_date"].apply(lambda x: str(str(x)[:4]))
     for item in LIST_DATA_KEYS:
@@ -146,6 +146,8 @@ def main(test=False):
 
 
 if __name__ == '__main__':
+    main()
+
     # For testing only!
-    _generate_test_file()
-    main(test=True)
+    # _generate_test_file()
+    # main(test=True)
