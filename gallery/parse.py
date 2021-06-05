@@ -131,7 +131,7 @@ def add_one_mission(image_row, caption_row, mission):
     # caption_item = caption_item.replace("MISSION_NAME_EN", mission.mission_name_en)  # This line is first
     caption_item = caption_item.replace("MISSION_NAME", mission.mission_name)
     caption_item = caption_item.replace("mission_date_formatted", mission.mission_date_formatted)
-    caption_item = caption_item.replace("MISSION_LINK", mission.folder_path)
+    caption_item = caption_item.replace("MISSION_LINK", join("gallery", mission.folder_path))
     caption_row += caption_item
 
     return image_row, caption_row
