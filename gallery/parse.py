@@ -125,7 +125,7 @@ def add_one_mission(image_row, caption_row, mission):
     """Add one cell in the blocks in the main page."""
     image_item = copy.deepcopy(MAIN_PAGE_IMAGE_ITEM_TEMPLATE)
     caption_item = copy.deepcopy(MAIN_PAGE_CAPTION_ITEM_TEMPLATE)
-    image_item = image_item.replace("image_file", mission.badges[0].root_path)
+    image_item = image_item.replace("image_file", join("gallery", mission.badges[0].root_path))
     image_row += image_item
 
     # caption_item = caption_item.replace("MISSION_NAME_EN", mission.mission_name_en)  # This line is first
