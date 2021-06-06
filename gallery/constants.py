@@ -37,9 +37,23 @@ SINGLE_PAGE_CAPTION_ITEM_TEMPLATE = """<td align="center"><b> mission_name <br>�
 MAIN_PAGE_TEMPLATE = """
 # 中国航天任务徽章大赏  China Space Mission Badge Gallery
 
+*收集者：彭正皓（pengzh ie.cuhk.edu.hk）*
+
 *上次更新日期：TODAY*
 
+
+### 徽章大赏
+
 CONTENT
+
+### 待办事项
+
+* [x] 实现自动化生成主、分页面
+* [ ] 添加2021年徽章
+* [ ] 完善社区提交工作流
+
+...
+
 """
 
 MAIN_PAGE_BLOCK_TEMPLATE = """
