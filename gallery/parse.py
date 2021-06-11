@@ -40,12 +40,12 @@ def _generate_test_file():
         INFO_SOURCE_NAME: ["百度百科"],
         INFO_SOURCE_URL: ["https://baike.baidu.com/item/%E5%A4%A9%E8%88%9F%E4%BA%8C%E5%8F%B7/24695456"],
     }])
-    df.to_excel("dataset.xlsx")
+    df.to_csv("test.csv")
 
 
 def read_dataset(test=False):
-    data_path = "dataset.xlsx" if not test else "dataset.xlsx"
-    df: pd.DataFrame = pd.read_excel(data_path)
+    data_path = "dataset.csv" if not test else "test.csv"
+    df: pd.DataFrame = pd.read_csv(data_path)
     df["mission_year"] = df["mission_date"].apply(lambda x: str(str(x)[:4]))
     for item in LIST_DATA_KEYS:
         df.loc[:, item] = df.loc[:, item].apply(eval)
@@ -84,7 +84,7 @@ def generate_main_page(data, mission_list):
 def build_block_content(year, mission_list):
     # Filter mission, only keep this year.
     filtered = [m for m in mission_list if m.mission_year == str(year)]
-    filtered = sorted(filtered, key=lambda m: m.mission_date)
+    filtered = sorted(filtered, key=lambda m: m.mission_date, reverse=True)
 
     block_template = copy.deepcopy(MAIN_PAGE_BLOCK_TEMPLATE)
     block_template = block_template.replace("YEAR", year)
