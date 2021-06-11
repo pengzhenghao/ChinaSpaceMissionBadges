@@ -65,6 +65,8 @@ class Mission:
             (info_name, info_url) for info_name, info_url in zip(data_row[INFO_SOURCE_NAME], data_row[INFO_SOURCE_URL])
         ]
 
+        self.comment = data_row[COMMENT] if not pd.isna(data_row[COMMENT]) else None
+
     def generate_single_page(self):
         """Generate the whole markdown for single page of the mission"""
         template = copy.deepcopy(SINGLE_PAGE_TEMPLATE)
@@ -99,6 +101,10 @@ class Mission:
         for i in self.info_sources:
             info += "[{}]({}) ".format(i[0], i[1])
         info += "\n"
+        if self.comment is not None:
+            info += "* 其他："
+            info += self.comment
+            info += "\n"
         template = template.replace("INFO", info)
 
         with open(join(self.folder_path, "README.md"), "w") as f:

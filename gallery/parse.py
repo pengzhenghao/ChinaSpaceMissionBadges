@@ -91,7 +91,9 @@ def build_block_content(year, mission_list):
     block_template = block_template.replace("WIDTH", "1000px" if len(filtered) >= 3 else "550px")
     block_template = block_template.replace("OPEN_FLAG", "open" if str(year) == THIS_YEAR else "")
 
-    num_rows = int(math.ceil(len(filtered) / 3))
+    count = 0
+
+    num_rows = int(math.ceil((len(filtered) + 1) / 3))
     assert num_rows >= 1
 
     table_content = ""
@@ -102,6 +104,7 @@ def build_block_content(year, mission_list):
         for m_index in range(3):
             mission = filtered[m_index + i * 3]
             image_row, caption_row = add_one_mission(image_row, caption_row, mission)
+            count += 1
         row_content = row_content.replace("IMAGE_ROW", image_row)
         row_content = row_content.replace("CAPTION_ROW", caption_row)
         table_content += row_content
@@ -113,11 +116,15 @@ def build_block_content(year, mission_list):
     for j in range(len(filtered) - num_extra_items, len(filtered)):
         mission = filtered[j]
         image_row, caption_row = add_one_mission(image_row, caption_row, mission)
+        count += 1
     row_content = row_content.replace("IMAGE_ROW", image_row)
     row_content = row_content.replace("CAPTION_ROW", caption_row)
     table_content += row_content
 
     block_template = block_template.replace("TABLE_CONTENT", table_content)
+
+    assert count == len(filtered), (count, len(filtered), num_rows, num_extra_items)
+
     return block_template
 
 
