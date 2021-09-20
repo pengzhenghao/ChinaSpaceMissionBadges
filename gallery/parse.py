@@ -48,7 +48,10 @@ def read_dataset(test=False):
     df: pd.DataFrame = pd.read_csv(data_path)
     df["mission_year"] = df["mission_date"].apply(lambda x: str(str(x)[:4]))
     for item in LIST_DATA_KEYS:
-        df.loc[:, item] = df.loc[:, item].apply(eval)
+        try:
+            df.loc[:, item] = df.loc[:, item].apply(eval)
+        except:
+            print("Error happens at: ", df.loc[:, item])
     mission_list = [Mission(row) for _, row in df.iterrows()]
     return df, mission_list
 
