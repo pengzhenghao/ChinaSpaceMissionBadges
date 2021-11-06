@@ -4,7 +4,6 @@ from numbers import Integral
 from os.path import join, dirname
 
 import pandas as pd
-from pandas import Series
 
 from constants import *
 
@@ -47,36 +46,49 @@ class YAMLBadge(Badge):
         self.root_path = get_path_from_root(date, image_file)
         self.local_path = image_file
         self.source_name = str(data["name"])
-        self.source_url =  str(data["url"])
+        self.source_url = str(data["url"])
         # self.image_count = image_count
 
 
 class Mission:
-    def __init__(self, data_row: Series):
-        self.mission_name = str(data_row[MISSION_NAME])
-        self.mission_date = str(data_row[MISSION_DATE])
+    def __init__(self, data: dict):
+        # Load data
+        assert len(data) == 1
+        key = list(data.keys())[0]
+        data_row = data[key]
 
+        # Retrieve information
+        self.mission_name = data_row[MISSION_NAME]
+        self.mission_name_en = data_row[MISSION_NAME_EN]
+        self.mission_date = str(key)
         date, _ = validate_date(self.mission_date)
         self.mission_date_formatted = datetime.datetime.strftime(date, "%Y年%m月%d日")
         self.mission_year = str(date.year)
-
-        self.mission_name_en = str(data_row[MISSION_NAME_EN])
         self.launch_vehicle = str(data_row[LAUNCH_VEHICLE])
+        self.launch_vehicle_en = str(data_row[LAUNCH_VEHICLE_EN])
         self.payload = str(data_row[PAYLOAD])
+        self.payload_en = str(data_row[PAYLOAD_EN])
+        self.comment = data_row[COMMENT] if not pd.isna(data_row[COMMENT]) else None
 
-        image_paths = list(data_row[IMAGE_FILE])
-        assert 1 <= len(image_paths) <= 2, "We only support maximally 2 badges for single mission now!"
-
-        self.badges = []
-        for image_count, image_file in enumerate(image_paths):
-            self.badges.append(Badge(self.mission_date, image_file, image_count, data_row))
+        # Load images, single image or multiple images.
+        images = data_row[IMAGE]
+        if isinstance(images, dict):
+            images = [images]
+        assert isinstance(images, list)
+        assert 1 <= len(images) <= 2, "We only support maximally 2 badges for single mission now!"
+        badges = []
+        for image_info in images:
+            image_info[MISSION_DATE] = self.mission_date
+            badges.append(YAMLBadge(image_info))
+        self.badges = badges
         self.folder_path = dirname(self.badges[0].root_path)
 
-        self.info_sources = [
-            (info_name, info_url) for info_name, info_url in zip(data_row[INFO_SOURCE_NAME], data_row[INFO_SOURCE_URL])
-        ]
-
-        self.comment = data_row[COMMENT] if not pd.isna(data_row[COMMENT]) else None
+        # Load information sources, single source or multiple sources.
+        infos = data_row[INFO]
+        if isinstance(infos, dict):
+            infos = [infos]
+        assert isinstance(infos, list)
+        self.infos = infos
 
     def generate_single_page(self):
         """Generate the whole markdown for single page of the mission"""
@@ -101,9 +113,9 @@ class Mission:
         template = template.replace("MISSION_NAME", self.mission_name)
 
         message = ""
-        message += "* 时间：{}\n".format(self.mission_date_formatted)
-        message += "* 载具：{}\n".format(self.launch_vehicle)
-        message += "* 载荷：{}\n".format(self.payload)
+        message += "* 时间：{} ({})\n".format(self.mission_date_formatted, None)
+        message += "* 载具：{} ({})\n".format(self.launch_vehicle, self.launch_vehicle_en)
+        message += "* 载荷：{} ()\n".format(self.payload, self.launch_vehicle_en)
         message += "* 来源："
         for b in self.badges:
             message += "[{}]({}) ".format(b.source_name, b.source_url)
@@ -128,49 +140,6 @@ class Mission:
             mission_name_en=self.mission_name_en,
             date=self.mission_date_formatted
         )
-
-
-class YAMLMission(Mission):
-    def __init__(self, data):
-
-        assert isinstance(data, dict)
-        assert len(data) == 1
-
-        key = list(data.keys())[0]
-
-        data_row = data[key]
-        self.mission_name = data_row[MISSION_NAME]
-        self.mission_name_en = data_row[MISSION_NAME_EN]
-
-        self.mission_date = str(key)
-
-        date, _ = validate_date(self.mission_date)
-        self.mission_date_formatted = datetime.datetime.strftime(date, "%Y年%m月%d日")
-        self.mission_year = str(date.year)
-
-        self.launch_vehicle = str(data_row[LAUNCH_VEHICLE])
-        self.payload = str(data_row[PAYLOAD])
-
-        images = data_row[IMAGE]
-        if isinstance(images, dict):
-            images = [images]
-        assert isinstance(images, list)
-        assert 1 <= len(images) <= 2, "We only support maximally 2 badges for single mission now!"
-        badges = []
-        for image_info in images:
-            image_info[MISSION_DATE] = self.mission_date
-            badges.append(YAMLBadge(image_info))
-        self.badges = badges
-
-        self.folder_path = dirname(self.badges[0].root_path)
-
-        infos = data_row[INFO]
-        if isinstance(infos, dict):
-            infos = [infos]
-        assert isinstance(infos, list)
-        self.infos = infos
-
-        self.comment = data_row[COMMENT] if not pd.isna(data_row[COMMENT]) else None
 
 
 if __name__ == '__main__':
