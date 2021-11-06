@@ -12,6 +12,8 @@ IMAGE_SOURCE_URL = "image_source_url"
 INFO_SOURCE_NAME = "info_source_name"
 INFO_SOURCE_URL = "info_source_url"
 COMMENT = "comment"
+IMAGE = "image"
+INFO = "info"
 
 LIST_DATA_KEYS = [IMAGE_FILE, IMAGE_SOURCE_NAME, IMAGE_SOURCE_URL, INFO_SOURCE_NAME, INFO_SOURCE_URL]
 
@@ -50,6 +52,7 @@ CONTENT
 ### 待办事项
 
 * [x] 实现自动化生成主、分页面
+* [X] 重构系统，简化数据形式
 * [ ] 添加2021年徽章
 * [ ] 完善社区提交工作流
 

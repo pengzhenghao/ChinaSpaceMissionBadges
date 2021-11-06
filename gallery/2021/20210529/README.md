@@ -16,4 +16,5 @@
 * 载荷：天舟二号
 * 来源：[China航天](https://weibo.com/5616492130/KhKKlaGS2) [百度百科](https://baike.baidu.com/item/%E5%A4%A9%E8%88%9F%E4%BA%8C%E5%8F%B7/24695456) 
 * 信息：[百度百科](https://baike.baidu.com/item/%E5%A4%A9%E8%88%9F%E4%BA%8C%E5%8F%B7/24695456) 
+* 其他：YOU SHOULD REPLACE CONTENT IN TEMPLATE!
 

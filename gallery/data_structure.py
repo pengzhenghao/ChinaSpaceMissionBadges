@@ -40,6 +40,17 @@ class Badge:
         return "Badge <{}>".format(self.local_path)
 
 
+class YAMLBadge(Badge):
+    def __init__(self, data):
+        image_file = str(data["file"])
+        date = str(data[MISSION_DATE])
+        self.root_path = get_path_from_root(date, image_file)
+        self.local_path = image_file
+        self.source_name = str(data["name"])
+        self.source_url =  str(data["url"])
+        # self.image_count = image_count
+
+
 class Mission:
     def __init__(self, data_row: Series):
         self.mission_name = str(data_row[MISSION_NAME])
@@ -89,23 +100,23 @@ class Mission:
         template = template.replace("MISSION_NAME_EN", self.mission_name_en)  # This should be placed first
         template = template.replace("MISSION_NAME", self.mission_name)
 
-        info = ""
-        info += "* 时间：{}\n".format(self.mission_date_formatted)
-        info += "* 载具：{}\n".format(self.launch_vehicle)
-        info += "* 载荷：{}\n".format(self.payload)
-        info += "* 来源："
+        message = ""
+        message += "* 时间：{}\n".format(self.mission_date_formatted)
+        message += "* 载具：{}\n".format(self.launch_vehicle)
+        message += "* 载荷：{}\n".format(self.payload)
+        message += "* 来源："
         for b in self.badges:
-            info += "[{}]({}) ".format(b.source_name, b.source_url)
-        info += "\n"
-        info += "* 信息："
-        for i in self.info_sources:
-            info += "[{}]({}) ".format(i[0], i[1])
-        info += "\n"
+            message += "[{}]({}) ".format(b.source_name, b.source_url)
+        message += "\n"
+        message += "* 信息："
+        for info in self.infos:
+            message += "[{}]({}) ".format(info["name"], info["url"])
+        message += "\n"
         if self.comment is not None:
-            info += "* 其他："
-            info += self.comment
-            info += "\n"
-        template = template.replace("INFO", info)
+            message += "* 其他："
+            message += self.comment
+            message += "\n"
+        template = template.replace("INFO", message)
 
         with open(join(self.folder_path, "README.md"), "w") as f:
             f.write(template)
@@ -117,6 +128,49 @@ class Mission:
             mission_name_en=self.mission_name_en,
             date=self.mission_date_formatted
         )
+
+
+class YAMLMission(Mission):
+    def __init__(self, data):
+
+        assert isinstance(data, dict)
+        assert len(data) == 1
+
+        key = list(data.keys())[0]
+
+        data_row = data[key]
+        self.mission_name = data_row[MISSION_NAME]
+        self.mission_name_en = data_row[MISSION_NAME_EN]
+
+        self.mission_date = str(key)
+
+        date, _ = validate_date(self.mission_date)
+        self.mission_date_formatted = datetime.datetime.strftime(date, "%Y年%m月%d日")
+        self.mission_year = str(date.year)
+
+        self.launch_vehicle = str(data_row[LAUNCH_VEHICLE])
+        self.payload = str(data_row[PAYLOAD])
+
+        images = data_row[IMAGE]
+        if isinstance(images, dict):
+            images = [images]
+        assert isinstance(images, list)
+        assert 1 <= len(images) <= 2, "We only support maximally 2 badges for single mission now!"
+        badges = []
+        for image_info in images:
+            image_info[MISSION_DATE] = self.mission_date
+            badges.append(YAMLBadge(image_info))
+        self.badges = badges
+
+        self.folder_path = dirname(self.badges[0].root_path)
+
+        infos = data_row[INFO]
+        if isinstance(infos, dict):
+            infos = [infos]
+        assert isinstance(infos, list)
+        self.infos = infos
+
+        self.comment = data_row[COMMENT] if not pd.isna(data_row[COMMENT]) else None
 
 
 if __name__ == '__main__':

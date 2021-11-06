@@ -1,0 +1,17 @@
+20210529:
+  mission_name: 天舟二号
+  mission_name_en: Tianzhou 2
+  launch_vehicle: 长征七号遥三
+  launch_vehicle_en: LM7
+  payload: 天舟二号
+  image:
+    - name: China航天
+      url: https://weibo.com/5616492130/KhKKlaGS2
+      file: 20210529.jpeg
+    - name: 百度百科
+      url: https://baike.baidu.com/item/%E5%A4%A9%E8%88%9F%E4%BA%8C%E5%8F%B7/24695456
+      file: 202105292.png
+  info:
+    name: 百度百科
+    url: https://baike.baidu.com/item/%E5%A4%A9%E8%88%9F%E4%BA%8C%E5%8F%B7/24695456
+  comment: YOU SHOULD REPLACE CONTENT IN TEMPLATE!
